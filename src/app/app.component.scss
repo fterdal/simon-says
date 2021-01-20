@@ -1,0 +1,41 @@
+* {
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  text-align: center;
+}
+
+#btn-container {
+  border: 2px solid black;
+  background-color: white;
+  display: grid;
+  grid-template-areas:
+    "btn btn"
+    "btn btn";
+}
+
+.btn {
+  margin: 1em;
+  padding: 1em;
+  border: 2px solid black;
+}
+
+.blue {
+  background-color: lightblue;
+}
+.yellow {
+  background-color: yellow;
+}
+.green {
+  background-color: lightgreen;
+}
+.red {
+  background-color: pink;
+}
+.white {
+  background-color: white;
+}
