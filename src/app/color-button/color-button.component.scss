@@ -1,8 +1,11 @@
+:host {
+  margin: 1em;
+}
 
 .btn {
-  margin: 1em;
   padding: 1em;
-  border: 2px solid black;
+  width: 100%;
+  height: 100%;
 }
 
 .blue {
@@ -19,4 +22,7 @@
 }
 .white {
   background-color: white;
+}
+.purple {
+  background-color: violet;
 }

@@ -1,1 +1,3 @@
-<button (click)="changeColor()" class="btn {{ color }}">{{ color | titlecase }}</button>
+<button (click)="changeColor()" class="btn" [ngClass]="color">
+  {{ color | titlecase }}
+</button>
