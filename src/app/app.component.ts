@@ -12,4 +12,9 @@ export class AppComponent {
   currentColor = 'white'
   // TODO: What happens when the child component changes it's color?
   // Does the App component register a change? Or is it singlely bound?
+
+  log(color: string) {
+    console.log('App component:', color)
+    this.currentColor = color
+  }
 }

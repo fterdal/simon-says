@@ -1,7 +1,14 @@
 <div id="app-container" [ngClass]="currentColor">
   <h1>Simon Says!</h1>
-  <h2>Current Color: <span id="current-color">{{ currentColor | titlecase }}</span></h2>
+  <h2>
+    Current Color:
+    <span id="current-color">{{ currentColor | titlecase }}</span>
+  </h2>
   <div id="btn-container">
-    <color-button *ngFor="let color of colors" [color]="color"></color-button>
+    <color-button
+      *ngFor="let color of colors"
+      [color]="color"
+      (colorChange)="log($event)"
+    ></color-button>
   </div>
 </div>

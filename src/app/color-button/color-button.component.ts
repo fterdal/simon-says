@@ -1,5 +1,4 @@
-import { Component, Input, Output } from '@angular/core';
-import * as EventEmitter from 'events';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'color-button',
@@ -14,11 +13,13 @@ import * as EventEmitter from 'events';
 // Okay, this article actually has some helpful references:
 // https://ultimatecourses.com/blog/passing-data-angular-2-components-input
 export class ColorButtonComponent {
+  // Two Way binding is wacky:
+  // https://angular.io/guide/two-way-binding#how-two-way-binding-works
   @Input() color: string;
-  @Output() selectColor = new EventEmitter();
-  
+  @Output() colorChange = new EventEmitter<string>();
+
   changeColor() {
-    console.log("color change", this.color);
-    this.selectColor.emit(this.color);
+    console.log('color change', this.color);
+    this.colorChange.emit(this.color);
   }
 }
