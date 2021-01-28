@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
+import * as EventEmitter from 'events';
 
 @Component({
   selector: 'color-button',
@@ -14,9 +15,10 @@ import { Component, Input } from '@angular/core';
 // https://ultimatecourses.com/blog/passing-data-angular-2-components-input
 export class ColorButtonComponent {
   @Input() color: string;
-
+  @Output() selectColor = new EventEmitter();
+  
   changeColor() {
-    console.log("color change")
-    this.color = 'purple'
+    console.log("color change", this.color);
+    this.selectColor.emit(this.color);
   }
 }
