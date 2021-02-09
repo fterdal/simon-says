@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { ColorButtonComponent } from './color-button/color-button.component';
+import { SequenceService } from './services/sequence.service';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,9 @@ import { ColorButtonComponent } from './color-button/color-button.component';
     BrowserModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    SequenceService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

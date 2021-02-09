@@ -8,8 +8,13 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use(cors());
 
+// We're using a JSON file as a "database":
+import "./users"
+
 app.get('/', (req, res, next) => {
-  res.send('hello world');
+  res.json({
+    message: 'Hello World'
+  });
 });
 
 const PORT = 8080;
