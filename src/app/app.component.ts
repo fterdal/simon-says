@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   
   ngOnInit() {
     this.sequence
-      .getSequence('https://jsonplaceholder.typicode.com/posts')
+      .getSequence()
       .subscribe((response) => {
         console.log(response);
       });

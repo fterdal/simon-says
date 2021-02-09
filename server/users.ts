@@ -26,6 +26,23 @@ type UserName = {
 
 export type User = RawUser & UserName;
 
+type BasicEditUserPayload = {};
+interface PinnedColorsEditUserPayload extends BasicEditUserPayload {
+  pinnedColors: Color[];
+}
+interface LongestStreakEditUserPayload extends BasicEditUserPayload {
+  longestStreak: number;
+}
+
+type EditUserPayload =
+  | PinnedColorsEditUserPayload
+  | LongestStreakEditUserPayload
+  | (PinnedColorsEditUserPayload & LongestStreakEditUserPayload);
+
+// | { pinnedColors: Color[] }
+// | { longestStreak: number }
+// | RawUser;
+
 async function loadUsers(): Promise<RawUserCollection> {
   return JSON.parse(
     (await fs.readFile('./usersDb.json')).toString()
@@ -68,6 +85,18 @@ export async function createUser(username: string): Promise<User | Error> {
   }
 }
 
+export async function editUser(
+  username: string,
+  payload: EditUserPayload
+): Promise<User | Error> {
+  const user = await getUser(username);
+  if (!user) throw new Error(`User with name ${username} does not exist`);
+  if ('pinnedColors' in payload) user.pinnedColors = payload.pinnedColors;
+  if ('longestStreak' in payload) user.longestStreak = payload.longestStreak;
+
+  throw new Error('TODO: Finish this function');
+}
+
 async function testbed() {
   try {
     await destroyUsers();
@@ -84,4 +113,3 @@ async function testbed() {
 testbed();
 
 // export async function deleteUser(userName: string) {}
-// export async function editUser(userName: string) {}
