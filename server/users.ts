@@ -26,18 +26,21 @@ type UserName = {
 
 export type User = RawUser & UserName;
 
-type BasicEditUserPayload = {};
-interface PinnedColorsEditUserPayload extends BasicEditUserPayload {
-  pinnedColors: Color[];
-}
-interface LongestStreakEditUserPayload extends BasicEditUserPayload {
-  longestStreak: number;
-}
+type EditUserPayload = {
+  pinnedColors?: Color[];
+  longestStreak?: number;
+};
+// interface PinnedColorsEditUserPayload extends BasicEditUserPayload {
+//   pinnedColors: Color[];
+// }
+// interface LongestStreakEditUserPayload extends BasicEditUserPayload {
+//   longestStreak: number;
+// }
 
-type EditUserPayload =
-  | PinnedColorsEditUserPayload
-  | LongestStreakEditUserPayload
-  | (PinnedColorsEditUserPayload & LongestStreakEditUserPayload);
+// type EditUserPayload =
+//   | PinnedColorsEditUserPayload
+//   | LongestStreakEditUserPayload
+//   | (PinnedColorsEditUserPayload & LongestStreakEditUserPayload);
 
 // | { pinnedColors: Color[] }
 // | { longestStreak: number }
@@ -91,8 +94,10 @@ export async function editUser(
 ): Promise<User | Error> {
   const user = await getUser(username);
   if (!user) throw new Error(`User with name ${username} does not exist`);
-  if ('pinnedColors' in payload) user.pinnedColors = payload.pinnedColors;
-  if ('longestStreak' in payload) user.longestStreak = payload.longestStreak;
+  if ('pinnedColors' in payload && payload.pinnedColors)
+    user.pinnedColors = payload.pinnedColors;
+  if ('longestStreak' in payload && payload.longestStreak)
+    user.longestStreak = payload.longestStreak;
 
   throw new Error('TODO: Finish this function');
 }
