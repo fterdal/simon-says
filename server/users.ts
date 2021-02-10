@@ -92,29 +92,33 @@ export async function editUser(
   username: string,
   payload: EditUserPayload
 ): Promise<User | Error> {
-  const user = await getUser(username);
+  const users = await loadUsers();
+  const user = users[username];
   if (!user) throw new Error(`User with name ${username} does not exist`);
   if ('pinnedColors' in payload && payload.pinnedColors)
     user.pinnedColors = payload.pinnedColors;
   if ('longestStreak' in payload && payload.longestStreak)
     user.longestStreak = payload.longestStreak;
-
+  await saveUsers(users);
+  return {
+    name: username,
+    ...user,
+  };
   throw new Error('TODO: Finish this function');
 }
 
-async function testbed() {
+(async function testbed() {
   try {
     await destroyUsers();
     console.log(await createUser('finn'));
+    console.log(await editUser('finn', { longestStreak: 1 }));
     // console.log(await createUser('collin'));
     console.log(await getUser('finn'));
     // console.log(await getUser('collin'));
-    await destroyUsers();
   } catch (err) {
     console.error('Something went wrong');
     console.error(err);
   }
-}
-testbed();
+})();
 
 // export async function deleteUser(userName: string) {}
